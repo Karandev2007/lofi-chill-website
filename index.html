@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chill Lofi</title>
+    <meta name="description" content="Chill Lofi website by Karan">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-gray-100 flex items-center justify-center h-screen relative overflow-hidden">
+    <div id="snow-container">
+        <!-- snowfall -->
+        <div class="snowfall"></div>
+        <div class="snowfall"></div>
+        <div class="snowfall"></div>
+        <div class="snowfall"></div>
+        <div class="snowfall"></div>
+        <div class="snowfall"></div>
+        <div class="snowfall"></div>
+        <div class="snowfall"></div>
+        <div class="snowfall"></div>
+    </div>
+    <div class="player bg-gray-800 bg-opacity-75 p-6 rounded-lg shadow-lg text-center z-10">
+        <h1 class="text-3xl font-bold mb-4">Chill Lofi</h1>
+        <p class="text-gray-400 mb-6">Relax and chill</p>
+        <img src="https://i.gifer.com/PPy.gif" alt="">
+        <br>
+        <audio id="audio" src="/tracks/Wind.mp3"></audio>
+        <button id="playerbuttons" class="bg-teal-500 text-white px-6 py-2 rounded-lg hover:bg-teal-400 transition mb-4">
+            Play
+        </button>
+        <div class="volume-control flex items-center justify-center gap-2">
+            <label for="volume" class="text-gray-400 text-sm">Volume:</label>
+            <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" class="w-32">
+        </div>
+    </div>
+    <script>
+        const audio = document.getElementById('audio');
+        const playerbuttons = document.getElementById('playerbuttons');
+        const volumeControl = document.getElementById('volume');
+
+        playerbuttons.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playerbuttons.textContent = 'Pause';
+            } else {
+                audio.pause();
+                playerbuttons.textContent = 'Play';
+            }
+        });
+
+        volumeControl.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+
+        // snowfall effect
+        const snowContainer = document.getElementById('snow-container');
+        const script = document.createElement('script');
+        script.src = "https://cdn.jsdelivr.net/npm/snowfall@1.0.0/dist/snowfall.min.js";
+        script.onload = () => {
+            snowfall.snow(document.body, {
+                maxSize: 5,
+                minSize: 2,
+                round: true,
+                shadow: true,
+            });
+        };
+        document.body.appendChild(script);
+    </script>
+</body>
+</html>
